@@ -8,6 +8,10 @@ $sql_livros_recentes = 'SELECT * FROM livros ORDER BY id DESC LIMIT 4'; // Limit
 $result_livros_recentes = $conexao->query($sql_livros_recentes);
 
 
+// Consulta para obter os usuários com mais livros lidos
+$sql_usuarios_mais_livros = "SELECT id, nome, totalLivros FROM usuarios ORDER BY totalLivros DESC";
+$result_usuarios_mais_livros = $conexao->query($sql_usuarios_mais_livros);
+
 // Consulta para obter livros da tabela "livros" e suas categorias
 $sqlLivros = "SELECT livros.id, livros.titulo, livros.idCategorias, livros.descricao, livros.imgCapa, livros.autor, livros.edicao, categorias.descricao as categoria_descricao
 FROM livros
@@ -161,39 +165,31 @@ while ($livro = $resultLivros->fetch_assoc()) {
             </div>
         </div>
     </div>
-                        <div class="col-lg-4">
-                            <div class="top-streamers">
-                                <div class="heading-section">
-                                    <h4><em>Top</em> Leitores</h4>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div class="main-button">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h6 style="color: white; font-weight: bold;">01</h6>
-                                        <h6><i class="fa fa-check"></i> LahutaM</h6>
-                                        <div class="main-button">
-                                        </div>
-                                    </li>
-                                    <li>
-                                    <h6 style="color: white; font-weight: bold;">02</h6>
-                                        <h6><i class="fa fa-check"></i> Kengan</h6>
-                                        <div class="main-button">
-                                        </div>
-                                    </li>
-                                    <li>
-                                    <h6 style="color: white; font-weight: bold;">03</h6>
-                                        <h6><i class="fa fa-check"></i> Areluwa</h6>
-                                        <div class="main-button">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ***** Featured Games End ***** -->
+    <div class="col-lg-4">
+    <div class="top-streamers">
+        <div class="heading-section">
+            <h4><em>Top</em> Leitores</h4>
+        </div>
+        <ul>
+            <?php
+            $contador = 1; // Inicialize um contador
+            // Loop para exibir os usuários com mais livros lidos
+            while ($usuario = $result_usuarios_mais_livros->fetch_assoc()) {
+                $usuarioNome = $usuario['nome'];
+                $totalLivrosLidos = $usuario['totalLivros'];
+                echo '<li>';
+                echo '<h6 style="color: white; font-weight: bold;">' . sprintf("%02d", $contador) . '</h6>';
+                echo '<h6>  <i class="fa fa-check"></i> ' . $usuarioNome . '</h6>';
+                echo '<div class="main-button">';
+                echo '<h6 style="color: white; font-weight: bold;"><i class="fa fa-eye"></i>' . $totalLivrosLidos . '</h6>';
+                echo '</div>';
+                echo '</li>';
+                $contador++; // Incrementar o contador
+            }
+            ?>
+        </ul>
+    </div>
+</div>
 
   <!-- Loop pelas categorias e exiba os livros -->
   <?php

@@ -31,15 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_update->close();
     $conexao->close();
   } else {
-    // Consulta para obter os dados do usuário
-    $id = $_SESSION["id"];
-    $sql_select_user = "SELECT nome, email, dtNascimento, telefone FROM usuarios WHERE id = ?";
-    $stmt_select_user = $conexao->prepare($sql_select_user);
-    $stmt_select_user->bind_param("i", $id);
-    $stmt_select_user->execute();
-    $stmt_select_user->bind_result($nome, $email, $dtNascimento, $telefone);
-    $stmt_select_user->fetch();
-    $stmt_select_user->close();
+// Consulta para obter os dados do usuário
+$id = $_SESSION["id"];
+$sql_select_user = "SELECT nome, email, dtNascimento, telefone, totalLivros, totalJogos, totalVideos FROM usuarios WHERE id = ?";
+$stmt_select_user = $conexao->prepare($sql_select_user);
+$stmt_select_user->bind_param("i", $id);
+$stmt_select_user->execute();
+$stmt_select_user->bind_result($nome, $email, $dtNascimento, $telefone, $totalLivros, $totalJogos, $totalVideos);
+$stmt_select_user->fetch();
+$stmt_select_user->close();
 }
 ?>
 
@@ -194,11 +194,10 @@ if (isset($_SESSION['nome'])) {
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-01.jpg" alt="" style="border-radius: 23px;">
-                              <a href="https://www.youtube.com/watch?v=r1b03uKWk_M" target="_blank"><i class="fa fa-play"></i></a>
                             </div>
                             <div class="down-content">
                               <h4>Livros lidos</h4>
-                              <span><i class="fa fa-eye"></i> 250</span>
+                              <span><i class="fa fa-eye"></i> <?php echo $totalLivros; ?></span>
                             </div>
                           </div>
                         </div>
@@ -206,11 +205,10 @@ if (isset($_SESSION['nome'])) {
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-02.jpg" alt="" style="border-radius: 23px;">
-                              <a href="https://www.youtube.com/watch?v=r1b03uKWk_M" target="_blank"><i class="fa fa-play"></i></a>
                             </div>
                             <div class="down-content">
                               <h4>Jogos acessados</h4>
-                              <span><i class="fa fa-eye"></i> 183</span>
+                              <span><i class="fa fa-eye"></i> <?php echo $totalJogos; ?></span>
                             </div>
                           </div>
                         </div>
@@ -218,11 +216,10 @@ if (isset($_SESSION['nome'])) {
                           <div class="item">
                             <div class="thumb">
                               <img src="assets/images/clip-03.jpg" alt="" style="border-radius: 23px;">
-                              <a href="https://www.youtube.com/watch?v=r1b03uKWk_M" target="_blank"><i class="fa fa-play"></i></a>
                             </div>
                             <div class="down-content">
                               <h4>Videos assistidos</h4>
-                              <span><i class="fa fa-eye"></i> 141</span>
+                              <span><i class="fa fa-eye"></i> <?php echo $totalVideos; ?></span>
                             </div>
                           </div>
                         </div>

@@ -1,8 +1,5 @@
 <?php
-include("validacoes/config.php");
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Certifique-se de que o usuário esteja autenticado e o ID do usuário esteja definido na sessão
     if (isset($_SESSION['usuario_id'])) {
         $usuario_id = $_SESSION['usuario_id'];
