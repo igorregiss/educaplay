@@ -99,6 +99,7 @@ if (isset($_GET['id'])) {
                       <li><a href="jogos.php">Jogos</a></li>
                       <li><a class="active" href="livros.php">Livros</a></li>
                       <li><a href="videos.php">Videos</a></li>
+                      <li><a href="contato.php">Sobre</a></li>
                       <li><a href="contato.php">Contato</a></li>
 
                       <?php

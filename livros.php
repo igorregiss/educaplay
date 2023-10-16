@@ -101,6 +101,7 @@ while ($livro = $resultLivros->fetch_assoc()) {
                             <li><a href="jogos.php">Jogos</a></li>
                             <li><a href="livros.php" class="active">Livros</a></li>
                             <li><a href="videos.php">Videos</a></li>
+                              <li><a href="contato.php">Sobre</a></li>
                             <li><a href="contato.php">Contato</a></li>
 
                             <?php
@@ -134,32 +135,32 @@ while ($livro = $resultLivros->fetch_assoc()) {
                 <div class="page-content">
                     <!-- ***** Featured Games Start ***** -->
                     <div class="row">
-                        <div class="col-lg-8">
-                            <div class="featured-games header-text">
-                                <div class="heading-section">
-                                    <h4>Últimos livros <em>adicionados</em></h4>
-                                </div>
-                                <div class="owl-features owl-carousel">
-                                <?php
-          // Loop para exibir os livros recentemente adicionados
-          while ($livro = $result_livros_recentes->fetch_assoc()) {
-          ?>
-                                    <div class="item">
-                                        <div class="thumb">
-                                            <img src="assets/images/livro/<?php echo $livro['imgCapa']; ?>" alt="">
-                                        </div>
-                                        <h4><?php echo $livro['titulo']; ?><br></h4>
-                                    </div>
-
-      <?php
-          }
-          ?>
-
-
-                                    
-                                </div>
-                            </div>
+    <div class="col-lg-8">
+        <div class="featured-games header-text">
+            <div class="heading-section">
+                <h4>Últimos livros <em>adicionados</em></h4>
+            </div>
+            <div class="owl-features owl-carousel">
+                <?php
+                // Loop para exibir os livros recentemente adicionados
+                while ($livro = $result_livros_recentes->fetch_assoc()) {
+                    // Crie o link para a página do livro com o ID do livro
+                    $link_to_livro = 'livro.php?id=' . $livro['id'];
+                ?>
+                <div class="item">
+                    <a href="<?php echo $link_to_livro; ?>">
+                        <div class="thumb">
+                            <img src="assets/images/livro/<?php echo $livro['imgCapa']; ?>" alt="">
                         </div>
+                    </a>
+                    <h4><a href="<?php echo $link_to_livro; ?>"><?php echo $livro['titulo']; ?></a><br></h4>
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
                         <div class="col-lg-4">
                             <div class="top-streamers">
                                 <div class="heading-section">
