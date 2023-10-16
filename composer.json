@@ -1,0 +1,9 @@
+{
+    "name": "educaplay/play",
+    "description": "Educação digital",
+    "minimum-stability": "dev",
+    "require": {
+        "fathomminds/php-text-to-speech": "dev-master"
+        
+    }
+}
