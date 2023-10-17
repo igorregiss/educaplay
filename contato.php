@@ -3,10 +3,10 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   include ('validacoes/config.php');
-
+/*
   $email = $_POST['email'];
   $senha = $_POST['senha'];
-
+*/
   $sql = 'SELECT id, nome FROM usuarios WHERE email = ? AND senha = ?';
   $stmt = $conexao->prepare($sql);
   $stmt->bind_param('ss', $email, $senha);
@@ -96,7 +96,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Search End ***** -->
                         <div class="search-input">
-                            <form id="search" action="#">
+                        <form id="search" action="buscar.php" method="post">
                                 <input type="text" placeholder="Buscar" id='searchText' name="searchKeyword"
                                     onkeypress="handle" />
                                 <i class="fa fa-search"></i>

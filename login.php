@@ -95,7 +95,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Search End ***** -->
                       <div class="search-input">
-                        <form id="search" action="#">
+                      <form id="search" action="buscar.php" method="post">
                           <input type="text" placeholder="Buscar" id='searchText' name="searchKeyword" onkeypress="handle" />
                           <i class="fa fa-search"></i>
                         </form>
@@ -107,7 +107,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <li><a href="jogos.php">Jogos</a></li>
                       <li><a href="livros.php">Livros</a></li>
                       <li><a href="videos.php">Videos</a></li>
-                      <li><a href="contato.php">Sobre</a></li>
+                      <li><a href="sobre.php">Sobre</a></li>
                       <li><a href="contato.php">Contato</a></li>
 
                       <?php
