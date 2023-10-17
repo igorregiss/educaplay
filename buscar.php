@@ -6,7 +6,7 @@ if (isset($_POST['searchKeyword'])) {
     $searchKeyword = $_POST['searchKeyword'];
 
     // Execute a pesquisa no banco de dados
-    include('validacoes/config.php');
+    include ('validacoes/config.php');
 
     // Realize a pesquisa nos livros
     $sqlLivros = "SELECT * FROM livros WHERE titulo LIKE '%$searchKeyword%' OR descricao LIKE '%$searchKeyword%'";
@@ -24,7 +24,7 @@ if (isset($_POST['searchKeyword'])) {
     $conexao->close();
 } else {
     // A pesquisa não foi submetida
-    $searchKeyword = "";
+    $searchKeyword = '';
     $resultLivros = array();
     $resultJogos = array();
     $resultVideos = array();
@@ -92,15 +92,15 @@ if (isset($_POST['searchKeyword'])) {
                             <li><a href="sobre.php">Sobre</a></li>
                             <li><a href="contato.php">Contato</a></li>
                             <?php
-                            // Verificar se o usuário está logado
-                            if (isset($_SESSION['nome'])) {
-                                // Usuário está logado
-                                echo '<li><a href="perfil.php"><i class="bi bi-person-fill"></i> ' . $_SESSION['nome'] . '</a></li>';
-                                echo '<li><a href="logout.php">Sair</a></li>';
-                            } else {
-                                // Usuário não está logado
-                                echo '<li class="login-link"> <a href="login.php"><i class="bi bi-person-fill"></i> Entrar</a></li>';
-                            }
+                                // Verificar se o usuário está logado
+                                if (isset($_SESSION['nome'])) {
+                                    // Usuário está logado
+                                    echo '<li><a href="perfil.php"><i class="bi bi-person-fill"></i> ' . $_SESSION['nome'] . '</a></li>';
+                                    echo '<li><a href="logout.php">Sair</a></li>';
+                                } else {
+                                    // Usuário não está logado
+                                    echo '<li class="login-link"> <a href="login.php"><i class="bi bi-person-fill"></i> Entrar</a></li>';
+                                }
                             ?>
                         </ul>
                         <a class="menu-trigger">

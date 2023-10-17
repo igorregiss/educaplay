@@ -1,95 +1,95 @@
 <?php
 session_start();
-require('validacoes/config.php');
+require ('validacoes/config.php');
 // Verifique se foi fornecido um ID de livro para edição
 if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-  
-  // Consulta SQL para buscar os dados do livro a ser editado usando prepared statement
-  $sql = "SELECT * FROM videoaula WHERE id = ?";
-  
-  // Preparar a consulta
-  $stmt = mysqli_prepare($conexao, $sql);
-  
-  // Vincular o parâmetro
-  mysqli_stmt_bind_param($stmt, "i", $id);
-  
-  // Executar a consulta
-  mysqli_stmt_execute($stmt);
-  
-  // Obter o resultado da consulta
-  $result = mysqli_stmt_get_result($stmt);
-  
-  // Verifique se a consulta foi bem-sucedida
-  if ($result && mysqli_num_rows($result) > 0) {
-      $videoaula = mysqli_fetch_assoc($result);
-  } else {
-      // Redirecione para uma página de erro ou faça algo apropriado caso o livro não seja encontrado
-      header('Location: pagina_de_erro.php');
-      exit();
-  }
-  
-  // Fechar a consulta preparada
-  mysqli_stmt_close($stmt);
+    $id = $_GET['id'];
+
+    // Consulta SQL para buscar os dados do livro a ser editado usando prepared statement
+    $sql = 'SELECT * FROM videoaula WHERE id = ?';
+
+    // Preparar a consulta
+    $stmt = mysqli_prepare($conexao, $sql);
+
+    // Vincular o parâmetro
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+
+    // Executar a consulta
+    mysqli_stmt_execute($stmt);
+
+    // Obter o resultado da consulta
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Verifique se a consulta foi bem-sucedida
+    if ($result && mysqli_num_rows($result) > 0) {
+        $videoaula = mysqli_fetch_assoc($result);
+    } else {
+        // Redirecione para uma página de erro ou faça algo apropriado caso o livro não seja encontrado
+        header('Location: pagina_de_erro.php');
+        exit ();
+    }
+
+    // Fechar a consulta preparada
+    mysqli_stmt_close($stmt);
 } else {
-  // Redirecione para uma página de erro ou faça algo apropriado se o ID de livro não for fornecido
-  header('Location: pagina_de_erro.php');
-  exit();
+    // Redirecione para uma página de erro ou faça algo apropriado se o ID de livro não for fornecido
+    header('Location: pagina_de_erro.php');
+    exit ();
 }
 
 // Verifique se o usuário está logado
 if (isset($_SESSION['id'])) {
-  $idDoUsuario = $_SESSION['id'];
+    $idDoUsuario = $_SESSION['id'];
 
-  // Conexão com o banco de dados (substitua as informações de conexão)
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "educaplay";
+    // Conexão com o banco de dados (substitua as informações de conexão)
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $dbname = 'educaplay';
 
-  $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-  // Verificar a conexão com o banco de dados
-  if ($conn->connect_error) {
-      die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-  }
+    // Verificar a conexão com o banco de dados
+    if ($conn->connect_error) {
+        die ('Erro na conexão com o banco de dados: ' . $conn->connect_error);
+    }
 
-  // Verificar se o usuário já visitou a página
-  if (isset($_SESSION['ultima_visita'])) {
-      $tempoDecorrido = time() - $_SESSION['ultima_visita'];
-  } else {
-      $tempoDecorrido = 0;
-  }
+    // Verificar se o usuário já visitou a página
+    if (isset($_SESSION['ultima_visita'])) {
+        $tempoDecorrido = time() - $_SESSION['ultima_visita'];
+    } else {
+        $tempoDecorrido = 0;
+    }
 
-  // Definir o tempo mínimo entre as atualizações (em segundos)
-  $tempoMinimo = 120; // 120 segundos (ou o valor desejado)
+    // Definir o tempo mínimo entre as atualizações (em segundos)
+    $tempoMinimo = 120;  // 120 segundos (ou o valor desejado)
 
-  // Verificar se o tempo decorrido é maior ou igual ao tempo mínimo
-  if ($tempoDecorrido >= $tempoMinimo) {
-      // Atualizar a hora da última visita
-      $_SESSION['ultima_visita'] = time();
+    // Verificar se o tempo decorrido é maior ou igual ao tempo mínimo
+    if ($tempoDecorrido >= $tempoMinimo) {
+        // Atualizar a hora da última visita
+        $_SESSION['ultima_visita'] = time();
 
-      // Incrementar a coluna totalJogos na tabela usuarios
-      $sql = "UPDATE usuarios SET totalVideos = totalVideos + 1 WHERE id = ?";
-      $stmt = $conn->prepare($sql);
+        // Incrementar a coluna totalJogos na tabela usuarios
+        $sql = 'UPDATE usuarios SET totalVideos = totalVideos + 1 WHERE id = ?';
+        $stmt = $conn->prepare($sql);
 
-      $stmt->bind_param("i", $idDoUsuario);
+        $stmt->bind_param('i', $idDoUsuario);
 
-      if ($stmt->execute()) {
-          echo "Total de videos incrementado para o usuário com ID " . $idDoUsuario;
-      } else {
-          echo "Erro na atualização do total de videos: " . $conn->error;
-      }
+        if ($stmt->execute()) {
+            echo 'Total de videos incrementado para o usuário com ID ' . $idDoUsuario;
+        } else {
+            echo 'Erro na atualização do total de videos: ' . $conn->error;
+        }
 
-      $stmt->close();
-  } else {
-      echo "Tempo mínimo entre as atualizações não foi atingido.";
-  }
+        $stmt->close();
+    } else {
+        echo 'Tempo mínimo entre as atualizações não foi atingido.';
+    }
 
-  // Fechar a conexão com o banco de dados
-  $conn->close();
+    // Fechar a conexão com o banco de dados
+    $conn->close();
 } else {
-  echo "Usuário não está logado."; // Ou redirecione para a página de login
+    header('Location: login.php');  // Substitua 'pagina_inicial.php' pelo URL da página inicial desejada}
 }
 ?>
 
@@ -131,6 +131,43 @@ TemplateMo 579 Cyborg Gaming
 https://templatemo.com/tm-579-cyborg-gaming
 
 -->
+
+  
+<script>
+    // Função para verificar se o usuário já visitou a página antes
+   function checkFirstVisit() {
+        if (localStorage.getItem('visited')) {
+            // O usuário já visitou a página antes, não faça nada
+            return false;
+        } else {
+            // É a primeira visita do usuário, marque como visitado
+            localStorage.setItem('visited', 'true');
+            return true;
+        }
+    }
+
+    // Função para exibir o popup automaticamente
+    function showPopupOnFirstVisit() {
+        if (checkFirstVisit()) {
+            // Exiba o popup automaticamente
+            alert('Você está iniciando uma jornada em nossa aba de jogos!\n\nQue este jogo possa lhe proporcionar diversão e conhecimento!');
+        }
+    }
+
+    // Chame a função para exibir o popup automaticamente quando a página carregar
+    window.onload = showPopupOnFirstVisit;
+/* 
+    // Função para exibir o popup automaticamente
+    function showPopupOnPageLoad() {
+        // Exiba o popup automaticamente
+        alert('Você está iniciando uma jornada em aba de livros!\n\nQue este livro possa lhe proporcionar conhecimento!\n\nE olha essa dica: caso queira, você pode usar a funcionalidade ler livro, assim você pode escutar seu livro.');
+
+    }
+
+    // Chame a função para exibir o popup automaticamente quando a página carregar
+    window.onload = showPopupOnPageLoad;*/
+</script>
+
 </head>
 
 <body>
@@ -178,17 +215,16 @@ https://templatemo.com/tm-579-cyborg-gaming
                             <li><a href="contato.php">Contato</a></li>
 
                             <?php
-      // Verificar se o usuário está logado
-      if (isset($_SESSION['nome'])) {
-        // Usuário está logado
-        echo '  <li><a href="perfil.php"><i class="bi bi-person-fill"></i> ' . $_SESSION['nome'] . '</a></li>';
-        echo '  <li><a href="logout.php">Sair</a></li';
-
-    } else {
-        // Usuário não está logado
-        echo '<li class="login-link"> <a href="login.php"><i class="bi bi-person-fill"></i> Entrar</a></li>';
-    }
-    ?>
+                                // Verificar se o usuário está logado
+                                if (isset($_SESSION['nome'])) {
+                                    // Usuário está logado
+                                    echo '  <li><a href="perfil.php"><i class="bi bi-person-fill"></i> ' . $_SESSION['nome'] . '</a></li>';
+                                    echo '  <li><a href="logout.php">Sair</a></li';
+                                } else {
+                                    // Usuário não está logado
+                                    echo '<li class="login-link"> <a href="login.php"><i class="bi bi-person-fill"></i> Entrar</a></li>';
+                                }
+                            ?>
                             ?>
                         </ul>
                         <a class='menu-trigger'>

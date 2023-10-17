@@ -1,40 +1,40 @@
 <?php
-require('includes/conexao.php');
-require('includes/validarLogin.php');
+require ('includes/conexao.php');
+require ('includes/validarLogin.php');
 // Verifique se foi fornecido um ID de livro para edição
 if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-  
-  // Consulta SQL para buscar os dados do livro a ser editado usando prepared statement
-  $sql = "SELECT * FROM livros WHERE id = ?";
-  
-  // Preparar a consulta
-  $stmt = mysqli_prepare($conexao, $sql);
-  
-  // Vincular o parâmetro
-  mysqli_stmt_bind_param($stmt, "i", $id);
-  
-  // Executar a consulta
-  mysqli_stmt_execute($stmt);
-  
-  // Obter o resultado da consulta
-  $result = mysqli_stmt_get_result($stmt);
-  
-  // Verifique se a consulta foi bem-sucedida
-  if ($result && mysqli_num_rows($result) > 0) {
-      $livro = mysqli_fetch_assoc($result);
-  } else {
-      // Redirecione para uma página de erro ou faça algo apropriado caso o livro não seja encontrado
-      header('Location: pagina_de_erro.php');
-      exit();
-  }
-  
-  // Fechar a consulta preparada
-  mysqli_stmt_close($stmt);
+    $id = $_GET['id'];
+
+    // Consulta SQL para buscar os dados do livro a ser editado usando prepared statement
+    $sql = 'SELECT * FROM livros WHERE id = ?';
+
+    // Preparar a consulta
+    $stmt = mysqli_prepare($conexao, $sql);
+
+    // Vincular o parâmetro
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+
+    // Executar a consulta
+    mysqli_stmt_execute($stmt);
+
+    // Obter o resultado da consulta
+    $result = mysqli_stmt_get_result($stmt);
+
+    // Verifique se a consulta foi bem-sucedida
+    if ($result && mysqli_num_rows($result) > 0) {
+        $livro = mysqli_fetch_assoc($result);
+    } else {
+        // Redirecione para uma página de erro ou faça algo apropriado caso o livro não seja encontrado
+        header('Location: pagina_de_erro.php');
+        exit ();
+    }
+
+    // Fechar a consulta preparada
+    mysqli_stmt_close($stmt);
 } else {
-  // Redirecione para uma página de erro ou faça algo apropriado se o ID de livro não for fornecido
-  header('Location: pagina_de_erro.php');
-  exit();
+    // Redirecione para uma página de erro ou faça algo apropriado se o ID de livro não for fornecido
+    header('Location: pagina_de_erro.php');
+    exit ();
 }
 ?>
 <!DOCTYPE html>
@@ -148,7 +148,7 @@ if (isset($_GET['id'])) {
                         <li class='nav-item d-flex align-items-center'>
                             <a href='javascript:;' class='nav-link text-white font-weight-bold px-0'>
                                 <i class='fa fa-user me-sm-1'></i>
-                                <span class="d-sm-inline d-none"><?php echo $_SESSION['nome'];?></span>
+                                <span class="d-sm-inline d-none"><?php echo $_SESSION['nome']; ?></span>
                             </a>
                         </li>
                         <li class='nav-item d-xl-none ps-3 d-flex align-items-center'>
@@ -182,22 +182,22 @@ if (isset($_GET['id'])) {
                             <div class='card-body'>
                                 <p class='text-uppercase text-sm'>Editar Livro</p>
                                 <?php
-                                if(isset($_GET['msg'])){
-                                    $msg = $_GET['msg'];
-                                    if($msg == "sucesso"){
-                                        echo "
+                                    if (isset($_GET['msg'])) {
+                                        $msg = $_GET['msg'];
+                                        if ($msg == 'sucesso') {
+                                            echo "
                                         <div class='col-md-12 btn btn-strong' style='background-color: #0777EE; color: white;'>
                                             Livro atualizado com sucesso!
                                         </div>
                                         ";
-                                    }else{
-                                        echo "
+                                        } else {
+                                            echo "
                                         <div class='alert alert-danger'>
                                             Ops! Erro ao atualizar o Livro!
                                         </div>
                                         ";
+                                        }
                                     }
-                                }
                                 ?>
                                 <div class='row'>
                                     <div class='col-md-6'>
@@ -206,35 +206,35 @@ if (isset($_GET['id'])) {
                                             <select class='form-control' name='idCategorias' id='idCategorias'>
                                                 <option value=''>Selecione uma categoria</option>
                                                 <?php
-                                                // Conecte-se ao banco de dados
-                                                
-                                                // Verifique se a conexão foi bem-sucedida
-                                                if (!$conexao) {
-                                                    die("Falha na conexão com o banco de dados: " . mysqli_connect_error());
-                                                }
-                                                
-                                                // Consulta SQL para buscar categorias
-                                                $sql = "SELECT id, descricao FROM categorias";
-                                                
-                                                // Execute a consulta SQL
-                                                $result = mysqli_query($conexao, $sql);
-                                                
-                                                // Verifique se a consulta foi bem-sucedida
-                                                if ($result) {
-                                                    // Loop para exibir as opções do seletor
-                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                        $idCategoria = $row['id'];
-                                                        $descricao = $row['descricao'];
-                                                        // Verifique se esta é a categoria selecionada para o livro
-                                                        $selected = ($idCategoria == $livro['idCategorias']) ? 'selected' : '';
-                                                        echo "<option value='$idCategoria' $selected>$descricao</option>";
+                                                    // Conecte-se ao banco de dados
+
+                                                    // Verifique se a conexão foi bem-sucedida
+                                                    if (!$conexao) {
+                                                        die ('Falha na conexão com o banco de dados: ' . mysqli_connect_error());
                                                     }
-                                                } else {
-                                                    echo "<option value=''>Erro ao buscar categorias</option>";
-                                                }
-                                                
-                                                // Feche a conexão com o banco de dados
-                                                mysqli_close($conexao);
+
+                                                    // Consulta SQL para buscar categorias
+                                                    $sql = 'SELECT id, descricao FROM categorias';
+
+                                                    // Execute a consulta SQL
+                                                    $result = mysqli_query($conexao, $sql);
+
+                                                    // Verifique se a consulta foi bem-sucedida
+                                                    if ($result) {
+                                                        // Loop para exibir as opções do seletor
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                            $idCategoria = $row['id'];
+                                                            $descricao = $row['descricao'];
+                                                            // Verifique se esta é a categoria selecionada para o livro
+                                                            $selected = ($idCategoria == $livro['idCategorias']) ? 'selected' : '';
+                                                            echo "<option value='$idCategoria' $selected>$descricao</option>";
+                                                        }
+                                                    } else {
+                                                        echo "<option value=''>Erro ao buscar categorias</option>";
+                                                    }
+
+                                                    // Feche a conexão com o banco de dados
+                                                    mysqli_close($conexao);
                                                 ?>
                                             </select>
                                         </div>
@@ -332,7 +332,7 @@ if (isset($_GET['id'])) {
 
     <script>
         CKEDITOR.replace('editor', {
-            filebrowserUploadUrl: '/upload.php' // URL do script que lida com o upload de imagens
+            filebrowserUploadUrl: 'upload.php' // URL do script que lida com o upload de imagens
         });
     </script>
     <!-- END CKEDITOR -->
