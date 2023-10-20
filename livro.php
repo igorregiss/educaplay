@@ -1,6 +1,7 @@
 <?php
 session_start();
 require ('validacoes/config.php');
+
 // Verifique se foi fornecido um ID de livro para edição
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
@@ -304,6 +305,7 @@ if (isset($_SESSION['id'])) {
   <script src="assets/js/popup.js"></script>
   <script src="assets/js/custom.js"></script>
 
+  
     <script>
       var descricao = document.getElementById("descricao").textContent;
       var speaking = false;

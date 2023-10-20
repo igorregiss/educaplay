@@ -1936,3 +1936,34 @@ body {
     width: 16%;
   }
 }
+
+
+        /* Estilos para o modal de fundo */
+        .modal-background {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+      }
+
+      /* Estilos para o modal em si */
+      .modal {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Estilos para o botão de fechar */
+      .close-button {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          cursor: pointer;
