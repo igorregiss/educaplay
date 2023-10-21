@@ -135,8 +135,9 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <li><a href="jogos.php">Jogos</a></li>
                       <li><a href="livros.php">Livros</a></li>
                       <li><a href="videos.php">Videos</a></li>
-                      <li><a href="sobre.php">Sobre</a></li>
                       <li><a href="contato.php">Contato</a></li>
+                      <li><a href="sobre.php">Sobre</a></li>
+
 
                       <?php
 

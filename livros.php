@@ -105,8 +105,8 @@ while ($livro = $resultLivros->fetch_assoc()) {
                             <li><a href="jogos.php">Jogos</a></li>
                             <li><a href="livros.php" class="active">Livros</a></li>
                             <li><a href="videos.php">Videos</a></li>
-                              <li><a href="sobre.php">Sobre</a></li>
                             <li><a href="contato.php">Contato</a></li>
+                            <li><a href="sobre.php">Sobre</a></li>
 
                             <?php
 
@@ -174,8 +174,7 @@ while ($livro = $resultLivros->fetch_assoc()) {
             <?php
             $contador = 1; // Inicialize um contador
             // Loop para exibir os usuários com mais livros lidos
-            while ($usuario = $result_usuarios_mais_livros->fetch_assoc()) {
-                $usuarioNome = $usuario['nome'];
+            while (($usuario = $result_usuarios_mais_livros->fetch_assoc()) && $contador <= 6) {                $usuarioNome = $usuario['nome'];
                 $totalLivrosLidos = $usuario['totalLivros'];
                 echo '<li>';
                 echo '<h6 style="color: white; font-weight: bold;">' . sprintf("%02d", $contador) . '</h6>';

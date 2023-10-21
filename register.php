@@ -68,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="assets/css/login.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script type="text/javascript" src="assets/popup/bioep.min.js"></script>
+    <script type="text/javascript" src="assets/popup/editar.js"></script>
     <!--
 
 TemplateMo 579 Cyborg Gaming
@@ -123,8 +124,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                       <li><a href="jogos.php">Jogos</a></li>
                       <li><a href="livros.php">Livros</a></li>
                       <li><a href="videos.php">Videos</a></li>
-                      <li><a href="sobre.php">Sobre</a></li>
                       <li><a href="contato.php">Contato</a></li>
+                      <li><a href="sobre.php">Sobre</a></li>
 
                       <?php
 
@@ -263,8 +264,9 @@ $(document).ready(function() {
 
         $('#telefone').val(telefone);
     });
-   // Verificar senha e confirmação de senha
-   $('#senha, #confirmSenha').on('keyup', function() {
+
+    // Verificar senha e confirmação de senha
+    $('#senha, #confirmSenha').on('keyup', function() {
         var senha = $('#senha').val();
         var confirmSenha = $('#confirmSenha').val();
         
@@ -274,6 +276,7 @@ $(document).ready(function() {
             $('#senha, #confirmSenha').removeClass('is-invalid');
         }
     });
+
     // Verificar e-mail e confirmação de e-mail
     $('#email, #confirmEmail').on('keyup', function() {
         var email = $('#email').val();
@@ -283,6 +286,24 @@ $(document).ready(function() {
             $('#email, #confirmEmail').addClass('is-invalid');
         } else {
             $('#email, #confirmEmail').removeClass('is-invalid');
+        }
+    });
+    
+    // Verificar se os campos de senha e email são iguais antes de enviar o formulário
+    $('form').on('submit', function() {
+        var senha = $('#senha').val();
+        var confirmSenha = $('#confirmSenha').val();
+        var email = $('#email').val();
+        var confirmEmail = $('#confirmEmail').val();
+        
+        if (senha !== confirmSenha) {
+            alert('Os campos de senha e confirmação de senha não coincidem.');
+            return false;
+        }
+        
+        if (email !== confirmEmail) {
+            alert('Os campos de email e confirmação de email não coincidem.');
+            return false;
         }
     });
 });

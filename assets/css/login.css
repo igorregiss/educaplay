@@ -12,12 +12,12 @@ p{
 
 
 a{
-  color:#e75e8d;  
+  color:#076DF2;  
 }
 
 
  a:hover {
-    color: #ad184c;
+    color: #034294;
     text-decoration: none;
 }
 
@@ -33,18 +33,18 @@ label {
 
 .button{
   margin-top:20px;
-  background-color: #e75e8d;
+  background-color: #076DF2;
 }
 
 .button:hover{
   margin-top:20px;
-  background-color: #e23974;
+  background-color: #076DF2;
 }
 
 
 button{
   margin-top:20px;
-  background-color: #e75e8d;
+  background-color: #076DF2;
 }
 
 .border-login{

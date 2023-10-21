@@ -62,7 +62,7 @@ if (isset($_SESSION['id'])) {
     }
 
     // Definir o tempo mínimo entre as atualizações (em segundos)
-    $tempoMinimo = 0;  // 10 segundos (ou o valor desejado)
+    $tempoMinimo = 60;  // 10 segundos (ou o valor desejado)
 
     // Verificar se o tempo decorrido é maior ou igual ao tempo mínimo
     if ($tempoDecorrido >= $tempoMinimo) {
@@ -207,8 +207,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                             <li><a class="active" href="jogos.php">Jogos</a></li>
                             <li><a href="livros.php">Livros</a></li>
                             <li><a href="videos.php">Videos</a></li>
-                            <li><a href="sobre.php">Sobre</a></li>
                             <li><a href="contato.php">Contato</a></li>
+                            <li><a href="sobre.php">Sobre</a></li>
 
                             <?php
                                 // Verificar se o usuário está logado

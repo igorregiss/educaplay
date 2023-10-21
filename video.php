@@ -62,7 +62,7 @@ if (isset($_SESSION['id'])) {
     }
 
     // Definir o tempo mínimo entre as atualizações (em segundos)
-    $tempoMinimo = 120;  // 120 segundos (ou o valor desejado)
+    $tempoMinimo = 60;  // 10 segundos (ou o valor desejado)
 
     // Verificar se o tempo decorrido é maior ou igual ao tempo mínimo
     if ($tempoDecorrido >= $tempoMinimo) {
@@ -76,14 +76,11 @@ if (isset($_SESSION['id'])) {
         $stmt->bind_param('i', $idDoUsuario);
 
         if ($stmt->execute()) {
-            echo 'Total de videos incrementado para o usuário com ID ' . $idDoUsuario;
         } else {
-            echo 'Erro na atualização do total de videos: ' . $conn->error;
         }
 
         $stmt->close();
     } else {
-        echo 'Tempo mínimo entre as atualizações não foi atingido.';
     }
 
     // Fechar a conexão com o banco de dados
@@ -92,7 +89,6 @@ if (isset($_SESSION['id'])) {
     header('Location: login.php');  // Substitua 'pagina_inicial.php' pelo URL da página inicial desejada}
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -211,8 +207,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                             <li><a href="jogos.php">Jogos</a></li>
                             <li><a href="livros.php">Livros</a></li>
                             <li><a class="active" href="videos.php">Videos</a></li>
-                            <li><a href="sobre.php">Sobre</a></li>
                             <li><a href="contato.php">Contato</a></li>
+                            <li><a href="sobre.php">Sobre</a></li>
 
                             <?php
                                 // Verificar se o usuário está logado
